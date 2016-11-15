@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_display"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="ca.uwaterloo.camevent.DisplayActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" I am title!"
+        android:textSize="30sp"
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
+        android:id="@+id/title" />
+    <ListView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/MyListView">
+    </ListView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Link"
+        android:textSize="20sp"
+        android:gravity="left|right"
+        android:id="@+id/link" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="I am description"
+        android:textSize="20sp"
+        android:gravity="left|right"
+        android:id="@+id/des" />
+</LinearLayout>
+
+

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_search">
+
+    <LinearLayout
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="70dp">
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/spinnerBuilding"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:background="@drawable/my_spinner" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp">
+
+        <EditText
+            android:id="@+id/etxt_fromdate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/start"
+            android:drawableLeft="@drawable/time"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp">
+
+        <EditText
+            android:id="@+id/keyWord"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/keyWord"
+            android:singleLine="true"
+            android:drawableLeft="@drawable/word" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp">
+
+        <Button
+            android:id="@+id/search_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="search"
+            android:hint="@string/search"
+            android:drawableLeft="@drawable/search"
+            android:color="@color/spinnerBackground"
+            />
+    </LinearLayout>
+
+</LinearLayout>
