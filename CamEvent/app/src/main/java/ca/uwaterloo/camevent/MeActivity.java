@@ -15,14 +15,18 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -55,11 +59,14 @@ public class MeActivity extends BaseActivity
      *
      */
     NavigationView navigationView = null;
+
     Toolbar toolbar = null;
     private static final String TAG = "MeActivity";
     private ViewPager mViewPager;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
+    static Boolean isTouched = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +104,7 @@ public class MeActivity extends BaseActivity
             }
         });
 
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -108,6 +116,7 @@ public class MeActivity extends BaseActivity
 
 
 
+        //SwitchCompat switchCompat = (SwitchCompat) findViewById(R.id.switch_compat);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
 
         //How to change elements in the header programatically
@@ -134,8 +143,34 @@ public class MeActivity extends BaseActivity
             // No user is signed in
 
         }
+        getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO);
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        /*Menu newMenu=null;
+        getMenuInflater().inflate(R.menu.activity_main_drawer,newMenu);
+        SwitchCompat switchCompat = (SwitchCompat) newMenu.findItem(R.id.switch_compat).getMenuInfo();
+        switchCompat.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                isTouched=true;
+                return false;
+            }
+        });
+        switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isTouched){
+                    isTouched=false;
+                    if(isChecked){
+                        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    }else{
+                        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    }
+                }
+            }
+        });*/
+
 
     }
 
@@ -185,6 +220,7 @@ public class MeActivity extends BaseActivity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -210,7 +246,34 @@ public class MeActivity extends BaseActivity
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
+        SwitchCompat switchCompat=(SwitchCompat)findViewById(R.id.switch_compat);
+
         int id = item.getItemId();
+        if(id==R.id.nav_theme){
+           if(isTouched){
+               isTouched=false;
+               getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+               recreate();
+           }else{
+               isTouched=true;
+               getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+               recreate();
+           }
+
+            /*switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked){
+                        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+
+                    }else{
+                        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+                    }
+                }
+            });*/
+
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
